@@ -2,5 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://econumo.com/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://econumo.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://econumo.com/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://econumo.com/ru/" />
   </url>
 </urlset>
