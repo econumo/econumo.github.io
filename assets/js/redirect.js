@@ -1,23 +1,27 @@
 (function(window, document) {
-    const getHostname = function (url) {
-        let a = document.createElement('a');
-        a.href = url;
-        return a.hostname;
-    };
+    // const getHostname = function (url) {
+    //     let a = document.createElement('a');
+    //     a.href = url;
+    //     return a.hostname;
+    // };
     const USER_LOCALE = 'userLocale';
     const savedUserLocale = window.sessionStorage.getItem(USER_LOCALE);
     const pageLocale = document.documentElement.lang;
 
     if (savedUserLocale) {
-        if (pageLocale === savedUserLocale) {
-            return;
-        } else {
-            if (document.referrer && getHostname(document.referrer) === document.location.hostname) {
-                window.sessionStorage.setItem(USER_LOCALE, pageLocale);
-                return;
-            }
-        }
+        return;
     }
+
+    // if (savedUserLocale) {
+    //     if (pageLocale === savedUserLocale) {
+    //         return;
+    //     } else {
+    //         if (document.referrer && getHostname(document.referrer) === document.location.hostname) {
+    //             window.sessionStorage.setItem(USER_LOCALE, pageLocale);
+    //             return;
+    //         }
+    //     }
+    // }
 
     let lang = window.navigator.languages ? window.navigator.languages[0] : null;
     lang = lang || window.navigator.language || window.navigator.browserLanguage || window.navigator.userLanguage;
