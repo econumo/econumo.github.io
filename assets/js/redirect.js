@@ -1,6 +1,23 @@
 (function(window, document) {
+    const getHostname = function (url) {
+        let a = document.createElement('a');
+        a.href = url;
+        return a.hostname;
+    };
     const USER_LOCALE = 'userLocale';
-    const savedUserLocale = window.localStorage.getItem(USER_LOCALE);
+    const savedUserLocale = window.sessionStorage.getItem(USER_LOCALE);
+    const pageLocale = document.documentElement.lang;
+
+    if (savedUserLocale) {
+        if (pageLocale === savedUserLocale) {
+            return;
+        } else {
+            if (document.referrer && getHostname(document.referrer) === document.location.hostname) {
+                window.sessionStorage.setItem(USER_LOCALE, pageLocale);
+                return;
+            }
+        }
+    }
 
     let lang = window.navigator.languages ? window.navigator.languages[0] : null;
     lang = lang || window.navigator.language || window.navigator.browserLanguage || window.navigator.userLanguage;
@@ -9,15 +26,8 @@
         shortLang = shortLang.split('-')[0];
     } while (shortLang.indexOf('-') !== -1);
 
-    if (savedUserLocale) {
-        if (shortLang !== savedUserLocale) {
-            window.localStorage.setItem(USER_LOCALE, shortLang);
-        }
-        return;
-    }
-
-    window.localStorage.setItem(USER_LOCALE, shortLang);
-    if (document.documentElement.lang === shortLang) {
+    window.sessionStorage.setItem(USER_LOCALE, shortLang);
+    if (pageLocale === shortLang) {
         return;
     }
 
